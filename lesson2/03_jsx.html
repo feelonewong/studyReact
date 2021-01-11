@@ -5,12 +5,48 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Count add && minus</title>
 </head>
 <body>
+<div id="app"></div>
+<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script src=""></script>
 
-<script ></script>
+<script  type="text/babel">
+  class App extends React.Component{
+      constructor(props) {
+          super(props);
+          this.state={
+             counter:0
+          };
+      }
+      render(){
+          let {counter} = this.state;
+          return(
+              <div>
+                <span>{counter}</span>
+                <button onClick={this.increment.bind(this)}>add</button>
+                <button onClick={this.decrement.bind(this)}>minus</button>
+              </div>
+          )
+      }
+      increment(){
+          let tempNumber = this.state.counter;
+          tempNumber++;
+          this.setState({
+              counter: tempNumber
+          })
+      }
+      decrement(){
+          let tempNumber = this.state.counter;
+          tempNumber--;
+          this.setState({
+              counter:tempNumber
+          });
+      }
+  }
+  ReactDOM.render(<App/>, document.getElementById("app"));
+</script>
 </body>
 </html>
