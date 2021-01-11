@@ -10,21 +10,28 @@
 <body>
 
 <script>
-  class Person{
+  class Person {
       constructor(name, age) {
         this.name = name;
         this.age = age;
       }
       running(){
-          console.log(this.name+"  正在跑步...她今年"+this.age+".")
+          console.log(this.name+" 正在🏃🏻");
       }
   }
-  const P = new Person("wallen",18);
 
-
-  let func = P.running();
-  console.log(func)
-
+  class Student extends Person{
+      constructor(name, age, skill) {
+        super(name, age);
+        this.skill = skill;
+      }
+      reading(){
+          console.log("技能是:"+this.skill);
+      }
+  }
+  const  student = new Student("小黄",24,"看书")
+  student.running();
+  student.reading();
 </script>
 </body>
 </html>
