@@ -36,11 +36,17 @@
                         { bookName: "《编程珠玑》", date: "2008-10", price: 39, buyNumber: 1 },
                         { bookName: "《代码大全》", date: "2006-3", price: 128, buyNumber: 1 },
                     ],
+                    item:{
+                        bookName:"",
+                        date:"",
+                        price:0,
+                        buyNumber:0
+                    },
                     allPrice:0
                 }
             }
             render() {
-                let { bookListInfo, allPrice } = this.state;
+                let { bookListInfo, allPrice,item } = this.state;
                 return (
 
                     <div>
@@ -87,6 +93,41 @@
                                 </tr>
                             </tfoot>
                         </table>
+
+
+                        <div style={{border:"1px solid red", padding:"20px"}}>
+                            <input type="text" 
+                                onChange={ (e) => { 
+                                    let temp = this.state.item;
+                                    temp["bookName"] = e.target.value;
+                                    this.setState({ item: temp })
+                                }}
+                                placeholder="请输入名称书本名称" 
+                                value={item.bookName} /><br/>
+                            <input type="text" 
+                                onChange={ (e) => { 
+                                    let temp = this.state.item;
+                                    temp["date"] = e.target.value;
+                                    this.setState({ item: temp })
+                                }}
+                                placeholder="请输入出版日期" value={item.date} /><br/>
+                            <input type="number" 
+                                onChange={ (e) => { 
+                                    let temp = this.state.item;
+                                    temp["price"] = e.target.value;
+                                    this.setState({ item: temp })
+                                }}
+                                placeholder="请输入书的价格"/><br/>
+                            <input type="number" 
+                                onChange={ (e) => { 
+                                        let temp = this.state.item;
+                                        temp["buyNumber"] = e.target.value;
+                                        this.setState({ item: temp })
+                                    }}
+                                placeholder="请输入购买数量"/><br/>
+                        </div>
+
+                        <button onClick={ e=>this.addBook()}>添加书籍</button>
                     </div>
                 )
             }
@@ -115,6 +156,17 @@
                     return preResult+item.price*item.buyNumber;
                 } ,initValue);
                 return totalPrice;
+            }
+            addBook(){
+                let temp = this.state.bookListInfo;
+                let {item} = this.state;
+                item.price = parseInt(item.price);
+                item.buyNumber = parseInt(item.buyNumber);
+                temp.push(item)
+                console.log(temp);
+                this.setState({
+                    bookListInfo: temp
+                })
             }
         }
 
